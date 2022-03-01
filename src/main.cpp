@@ -1,9 +1,3 @@
-
-/*Test
-*/
-
-
-
 #include <Arduino.h>
 #include <DS18B20.h>
 #include <Adafruit_I2CDevice.h>
