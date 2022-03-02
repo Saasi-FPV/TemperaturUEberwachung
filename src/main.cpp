@@ -22,7 +22,7 @@ int numberOfDevices = 0;
 DS18B20 ds(ONEWIREPIN);
 AddressList dsAddress;
 Display disp;
-SDhandler SD;
+SDhandler SDcard;
 
 
 
@@ -32,6 +32,7 @@ void setup() {
   numberOfDevices = ds.getNumberOfDevices(); Serial.println(ds.getNumberOfDevices());
 
   disp.begin();
+  SDcard.begin();
   disp.startScreen();
 
   delay(5000);
@@ -43,7 +44,6 @@ void setup() {
 
 void loop() {
 
-disp.touchTest();
-delay(200);
+
 
 }

@@ -2,8 +2,8 @@
 
 
 void Display::begin(){
-    tft.begin();
-    ts.begin();
+    tft.begin();    Serial.println("tft Begin");
+    ts.begin();     Serial.println("ts Begin");
     tft.fillScreen(ILI9341_BLACK);
     tft.setRotation(DISPLAYROTATION);
     ts.setRotation(DISPLAYROTATION);
@@ -54,13 +54,16 @@ void Display::plugedInSensorAddress(uint sensNr, uint8_t Address){
     tft.println(Address);
 }
 
+bool Display::JaNein(){
+    
+}
+
+
+
+
+/* WOOORRRKKSSSS!!!!
 void Display::touchTest(){
-    /*tft.fillScreen(ILI9341_BLACK);
-    tft.setTextColor(ILI9341_WHITE);
-    tft.setTextSize(4);
-    tft.setCursor(0, 0);
-    tft.println("Touch");
-    */
+    
     if (ts.touched()) {
     // do something....
   
@@ -71,26 +74,4 @@ void Display::touchTest(){
     Serial.print(p.y);
     }
 }
-/*
-bool Display::nextSensor(){
-    bool flag;
-    bool touched;
-    
-    tft.fillScreen(ILI9341_BLACK);
-    tft.setTextColor(ILI9341_WHITE);
-    tft.setTextSize(4);
-    tft.setCursor(0, 0);
-    tft.print("Weitere Sensoren?");
-
-    while(!touched){
-        
-    }
-
-
-
-    if (flag)
-        return 1;
-    else
-        return 0;
-        
-}*/
+*/

@@ -32,6 +32,7 @@ class Display{
         void plugInSensor(uint sensNr);
         void plugedInSensorAddress(uint sensNr, uint8_t Address);
         bool nextSensor(); 
+        bool JaNein();
 
         void touchTest();
     
