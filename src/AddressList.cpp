@@ -1,15 +1,15 @@
 #include <AddressList.h>
 
-void AddressList::setAddress(int position,uint8_t address[]){
+void AddressList::setAddress(int sensNr,uint8_t address[]){
     for (int i = 0; i < 8; i++){
-        addresslist[position][i] = address[i];
+        addresslist[sensNr][i] = address[i];
     }
 }
 
-void AddressList::getAddress(int position, uint8_t address[]){
+void AddressList::getAddress(int sensNr, uint8_t address[]){
     uint8_t tempaddress[8];
     for (int i = 0; i < 8; i++){
-        address[i] = addresslist[position][i];
+        address[i] = addresslist[sensNr][i];
     }
     memcpy(address, tempaddress, 8);
 }

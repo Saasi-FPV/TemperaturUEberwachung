@@ -6,8 +6,8 @@
 
 class AddressList{
     public:
-        void setAddress(int position,uint8_t address[]);
-        void getAddress(int position, uint8_t address[]);
+        void setAddress(int sensNr,uint8_t address[]);
+        void getAddress(int sensNr, uint8_t address[]);
         bool addressPresent(uint8_t address[]);
     
     

@@ -7,7 +7,7 @@
 #include <XPT2046_Touchscreen.h>
 
 
-//Pin
+/*//Pin
 #define TFT_DC      26
 #define TFT_CS      5
 #define TFT_MOSI    23
@@ -19,6 +19,7 @@
 
 //Display Rotation [0-3]
 #define DISPLAYROTATION 1
+*/
 
 
 
@@ -26,6 +27,14 @@
 
 class Display{
     public:
+        Display(uint TFT_CSin, uint TFT_DCin, uint TFT_RSTin, uint TS_CSin, uint DISPLAYROTATIONin){
+            TFT_CS = TFT_CSin;
+            TFT_DC = TFT_DCin;
+            TFT_RST = TFT_RSTin;
+            TS_CS = TS_CSin;
+            DISPLAYROTATION = DISPLAYROTATIONin;
+        }
+
         void begin();
         void startScreen();
         void unPlugsensor();
@@ -38,9 +47,14 @@ class Display{
     
     
     private:
-        //ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC, TFT_RST, TFT_MOSI, TFT_SCLK, TFT_MISO);
-        Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
-        XPT2046_Touchscreen ts = XPT2046_Touchscreen(T_CS);
+        uint TFT_CS;
+        uint TFT_DC;
+        uint TFT_RST;
+        uint TS_CS;
+        uint DISPLAYROTATION;
+        
+        Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS = 5, TFT_DC = 26, TFT_RST = 27);
+        XPT2046_Touchscreen ts = XPT2046_Touchscreen(TS_CS = 25);
 
 };
 
