@@ -1,5 +1,5 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#ifndef SDHANDLER_H
+#define SDHANDLER_H
 
 #include <SPI.h>
 #include <SD.h>
