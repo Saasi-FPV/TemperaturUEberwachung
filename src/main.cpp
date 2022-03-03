@@ -46,10 +46,12 @@ void setup() {
   SDcard.begin();
   disp.startScreen();
 
-  delay(5000);
+  delay(1000);
 
   disp.unPlugsensor();
-  delay(2000);
+  delay(1000);
+
+  disp.JaNein("Test");
   
   
   SDcard.write(1, 24.2);
@@ -57,7 +59,6 @@ void setup() {
 }
 
 void loop() {
-
 
 
 }

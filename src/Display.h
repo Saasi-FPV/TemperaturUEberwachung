@@ -7,6 +7,12 @@
 #include <XPT2046_Touchscreen.h>
 
 
+#define TS_MINX 449
+#define TS_MINY 214
+#define TS_MAXX 3946
+#define TS_MAXY 3837
+
+
 /*//Pin
 #define TFT_DC      26
 #define TFT_CS      5
@@ -41,7 +47,7 @@ class Display{
         void plugInSensor(uint sensNr);
         void plugedInSensorAddress(uint sensNr, uint8_t Address);
         bool nextSensor(); 
-        bool JaNein();
+        bool JaNein(String q);
 
         void touchTest();
     
