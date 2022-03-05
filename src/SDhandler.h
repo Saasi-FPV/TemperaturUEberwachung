@@ -14,7 +14,7 @@ class SDhandler{
 
         
         void begin();
-        void write(uint sensNr, float temp);
+        void write(uint sensNr, float temp, char time[]);
 
 
     

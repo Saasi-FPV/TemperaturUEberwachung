@@ -4,6 +4,7 @@
 #include <AddressList.h>
 #include <Display.h>
 #include <SDhandler.h>
+#include <RTClib.h>
 
 
 //Pins
@@ -18,6 +19,8 @@
 #define BAUDRATE          115200
 #define MAXSENSORS            15
 #define DISPLAYROTATION        1   //Display Rotation [0-3]
+#define DATETIMEASSORT "DD.MM.YY-hh:mm:ss"
+
 
 //Globale Variablen
 int numberOfDevices = 0;
@@ -29,6 +32,7 @@ DS18B20 ds(ONEWIREPIN);
 AddressList dsAddress;
 Display disp(TFT_CS, TFT_DC, TFT_RST, TS_CS, DISPLAYROTATION);
 SDhandler SDcard(SD_CS);
+RTC_DS3231 rtc;
 
 
 
@@ -44,21 +48,81 @@ void setup() {
 
   disp.begin();
   SDcard.begin();
+  rtc.begin();
   disp.startScreen();
 
   delay(1000);
 
   disp.unPlugsensor();
   delay(1000);
+  while (!disp.JaNein("Alle Sensoren ausgesteckt?"));
 
-  disp.JaNein("Test");
-  
-  
-  SDcard.write(1, 24.2);
-  
+
+  bool flag1 = 1;
+  bool flag2 = 1;
+  uint count = 0;
+  do{
+    disp.plugInSensor(count+1);
+    delay(2000);
+    while (!disp.JaNein("Sensor eingesteckt?"));
+    
+    flag2 = 1;
+    while (flag2){
+      ds.selectNext();
+      uint8_t address[8];
+      ds.getAddress(address);
+      //////////////////////////////////////////
+      Serial.print("Address:");
+      for (uint8_t i = 0; i < 8; i++) {
+        Serial.print(" ");
+        Serial.print(address[i]);
+      }
+      Serial.println("");
+      //////////////////////////////////////////
+      if (!dsAddress.addressPresent(address)){
+        dsAddress.setAddress(count, address);
+        flag2 = 0;
+      }
+    }
+    
+    if(!disp.JaNein("Weitere Sensor?"))
+      flag1 = 0;
+
+    
+
+
+    count++;
+  }while(flag1);
 }
 
+
+
 void loop() {
+
+char DaTim[] = DATETIMEASSORT; //Date Time sortment
+DateTime now = rtc.now();
+
+
+
+Serial.println("Which sensor would you like to read? ");
+
+while (Serial.available() == 0) {
+}
+
+int menuChoice = Serial.parseInt();
+Serial.println(menuChoice);
+
+
+uint8_t address[8];
+dsAddress.getAddress(menuChoice, address);
+
+Serial.print("Address:");
+for (uint8_t i = 0; i < 8; i++) {
+  Serial.print(" ");
+  Serial.print(address[i]);
+}
+Serial.println("");
+delay(500);
 
 
 }

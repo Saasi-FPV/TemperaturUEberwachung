@@ -4,9 +4,27 @@ void AddressList::setAddress(int sensNr,uint8_t address[]){
     for (int i = 0; i < 8; i++){
         addresslist[sensNr][i] = address[i];
     }
+    //////////////////////////////////////////
+    Serial.print("11Address:");
+      for (uint8_t i = 0; i < 8; i++) {
+        Serial.print(" ");
+        Serial.print(addresslist[sensNr][i]);
+      }
+    Serial.println("");
+    //////////////////////////////////////////
 }
 
 void AddressList::getAddress(int sensNr, uint8_t address[]){
+    
+    //////////////////////////////////////////
+    Serial.print("22Address:");
+      for (uint8_t i = 0; i < 8; i++) {
+        Serial.print(" ");
+        Serial.print(addresslist[sensNr][i]);
+      }
+    Serial.println("");
+    //////////////////////////////////////////    
+    
     uint8_t tempaddress[8];
     for (int i = 0; i < 8; i++){
         address[i] = addresslist[sensNr][i];

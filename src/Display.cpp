@@ -57,15 +57,16 @@ void Display::plugedInSensorAddress(uint sensNr, uint8_t Address){
 bool Display::JaNein(String q){
     tft.fillScreen(ILI9341_BLACK);
     tft.setTextColor(ILI9341_WHITE);
-    tft.setTextSize(4);
+    tft.setTextSize(3);
     tft.setCursor(0, 0);
     tft.print(q);
-    tft.println("?");
+    tft.println("");
     tft.drawRoundRect(40, 160, 100, 60, 5, ILI9341_GREEN);
     tft.fillRoundRect(40, 160, 100, 60, 5, ILI9341_GREEN);
     tft.drawRoundRect(180, 160, 100, 60, 5, ILI9341_RED);
     tft.fillRoundRect(180, 160, 100, 60, 5, ILI9341_RED);
     tft.setCursor(65, 175);
+    tft.setTextSize(4);
     tft.print("JA");
     tft.setCursor(183, 175);
     tft.print("Nein");
