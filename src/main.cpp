@@ -116,6 +116,25 @@ DateTime now = rtc.now();
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 Serial.println("Which sensor would you like to read? ");
 
 while (Serial.available() == 0) {
@@ -135,6 +154,6 @@ for (uint8_t i = 0; i < 8; i++) {
 }
 Serial.println("");
 delay(500);
-
+*/
 
 }
