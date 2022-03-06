@@ -20,6 +20,7 @@
 #define MAXSENSORS            15
 #define DISPLAYROTATION        1   //Display Rotation [0-3]
 #define DATETIMEASSORT "DD.MM.YY-hh:mm:ss"
+#define MAXSENSORS 15
 
 
 //Globale Variablen
@@ -29,7 +30,7 @@ int numberOfDevices = 0;
 
 //Objekte erstellen
 DS18B20 ds(ONEWIREPIN);
-AddressList dsAddress;
+AddressList dsAddress(MAXSENSORS);
 Display disp(TFT_CS, TFT_DC, TFT_RST, TS_CS, DISPLAYROTATION);
 SDhandler SDcard(SD_CS);
 RTC_DS3231 rtc;
@@ -59,32 +60,51 @@ void setup() {
 
 
   bool flag1 = 1;
-  bool flag2 = 1;
   uint count = 0;
   do{
+    bool flag2 = 1;
+    uint errorcount = 0;
+    bool maxSensorlocal = 0;   
     disp.plugInSensor(count+1);
     delay(2000);
     while (!disp.JaNein("Sensor eingesteckt?"));
     
-    flag2 = 1;
+
     while (flag2){
       ds.selectNext();
       uint8_t address[8];
       ds.getAddress(address);
       if (!dsAddress.addressPresent(address)){
-        dsAddress.setAddress(count, address);
+        if (!dsAddress.setAddress(count, address)){
+          maxSensorlocal = 1;
+          Serial.println("maxSensoren erreicht");
+        }
         flag2 = 0;
       }
+      else{
+        errorcount++;
+        if (errorcount > MAXSENSORS * 3){
+          if (disp.JaNein("Sensor nicht gefunden. Richtig eingesteckt?")){
+          errorcount = 0;
+          }
+          else{
+            flag2 = 0;
+          }
+        }
+      }
+    }
+    if (maxSensorlocal){   
+      break;
     }
     
     if(!disp.JaNein("Weitere Sensor?"))
       flag1 = 0;
 
-    
-
-
     count++;
   }while(flag1);
+
+  disp.sensorReadinComplete(dsAddress.getNumberOfSensors());
+
 }
 
 

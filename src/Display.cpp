@@ -54,6 +54,16 @@ void Display::plugedInSensorAddress(uint sensNr, uint8_t Address){
     tft.println(Address);
 }
 
+void Display::sensorReadinComplete(uint numberOfSensors){
+    tft.fillScreen(ILI9341_BLACK);
+    tft.setTextColor(ILI9341_WHITE);
+    tft.setTextSize(4);
+    tft.setCursor(0, 0);
+    tft.print("Fertig! ");
+    tft.println(numberOfSensors);
+    tft.println(" Sensoren wurden eingelesen"); 
+}
+
 bool Display::JaNein(String q){
     tft.fillScreen(ILI9341_BLACK);
     tft.setTextColor(ILI9341_WHITE);

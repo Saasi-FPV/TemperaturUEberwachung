@@ -1,9 +1,17 @@
 #include <AddressList.h>
 
-void AddressList::setAddress(int sensNr,uint8_t address[]){
-    for (int i = 0; i < 8; i++){
-        addresslist[sensNr][i] = address[i];
+bool AddressList::setAddress(int sensNr,uint8_t address[]){
+    if (numberOfSensors <= maxSensors){
+        for (int i = 0; i < 8; i++){
+            addresslist[sensNr][i] = address[i];
+        }
+        Serial.println("Address to Array");
+        numberOfSensors = numberOfSensors + 1;
+        Serial.println(numberOfSensors);
+        return 1;
     }
+    else
+        return 0;
 }
 
 void AddressList::getAddress(int sensNr, uint8_t address[]){ 
@@ -14,9 +22,14 @@ void AddressList::getAddress(int sensNr, uint8_t address[]){
     memcpy(address, tempaddress, 8);
 }
 
+uint AddressList::getNumberOfSensors(){
+    return numberOfSensors;
+}
+
 bool AddressList::addressPresent(uint8_t address[]){
     int counter;
-    for(int i = 0; i < 15; i++){
+    Serial.println("probe");
+    for(int i = 0; i < numberOfSensors; i++){
         for(int k = 0; k < 8; k++){
             if(address[k] == addresslist[i][k]){
                 counter ++;
