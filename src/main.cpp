@@ -71,14 +71,6 @@ void setup() {
       ds.selectNext();
       uint8_t address[8];
       ds.getAddress(address);
-      //////////////////////////////////////////
-      Serial.print("Address:");
-      for (uint8_t i = 0; i < 8; i++) {
-        Serial.print(" ");
-        Serial.print(address[i]);
-      }
-      Serial.println("");
-      //////////////////////////////////////////
       if (!dsAddress.addressPresent(address)){
         dsAddress.setAddress(count, address);
         flag2 = 0;
