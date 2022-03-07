@@ -117,7 +117,7 @@ void Display::showTemp(){
     tft.setTextSize(2);
     tft.setCursor(0, 0);
     for (int i = 0; i < counter; i++){
-        if (i < 10){
+        if (i+1 < 10){
             if (i % 2 == 0){
                 tft.print("S");
                 tft.print(i+1);
