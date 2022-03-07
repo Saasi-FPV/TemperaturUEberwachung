@@ -49,6 +49,8 @@ class Display{
         bool nextSensor();
         void sensorReadinComplete(uint numberOfSensors);
         bool JaNein(String q);
+        void showTempPrep(uint sensorNr, float temp);
+        void showTemp();
 
         void touchTest();
     
@@ -59,6 +61,9 @@ class Display{
         uint TFT_RST;
         uint TS_CS;
         uint DISPLAYROTATION;
+        uint counter = 0;
+        float temperature[100];
+
         
         Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS = 5, TFT_DC = 26, TFT_RST = 27);
         XPT2046_Touchscreen ts = XPT2046_Touchscreen(TS_CS = 25);

@@ -137,7 +137,10 @@ for (int i = 0; i <= numberOfDevices-1; i++){
   Serial.println(now.toString(DaTim));
   ///////////////////////////////////////////////////////////////
   SDcard.write(i+1, templocal, now.toString(DaTim));
+  disp.showTempPrep(i, templocal);
 }
+
+disp.showTemp();
 
 
 

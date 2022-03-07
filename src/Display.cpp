@@ -106,6 +106,98 @@ bool Display::JaNein(String q){
     }
 }
 
+void Display::showTempPrep(uint position, float temp){
+    temperature[position] = {temp};
+    counter++;
+}
+
+void Display::showTemp(){
+    tft.fillScreen(ILI9341_BLACK);
+    tft.setTextColor(ILI9341_WHITE);
+    tft.setTextSize(2);
+    tft.setCursor(0, 0);
+    for (int i = 0; i < counter; i++){
+        if (i < 10){
+            if (i % 2 == 0){
+                tft.print("S");
+                tft.print(i+1);
+                if (temperature[i] < 100.0){
+                    tft.print("   ");
+                    tft.print(temperature[i]);
+                }
+                else{
+                    tft.print("  ");
+                    tft.print(temperature[i]);
+                }
+            }
+            else{
+                tft.print("     S");
+                tft.print(i+1);
+                if (temperature[i] < 100.0){
+                    tft.print("   ");
+                    tft.println(temperature[i]);
+                }
+                else{
+                    tft.print("  ");
+                    tft.println(temperature[i]);
+                }               
+            }
+        }
+        else{
+            if (i % 2 == 0){
+                tft.print("S");
+                tft.print(i+1);
+                if (temperature[i] < 100.0){
+                    tft.print("  ");
+                    tft.print(temperature[i]);
+                }
+                else{
+                    tft.print(" ");
+                    tft.print(temperature[i]);
+                }
+            }
+            else{
+                tft.print("     S");
+                tft.print(i+1);
+                if (temperature[i] < 100.0){
+                    tft.print("  ");
+                    tft.println(temperature[i]);
+                }
+                else{
+                    tft.print(" ");
+                    tft.println(temperature[i]);
+                }               
+            }                        
+        }
+    }
+    counter = 0;
+}
+
+
+
+/*
+void Display::showTemp(){
+    tft.fillScreen(ILI9341_BLACK);
+    tft.setTextColor(ILI9341_WHITE);
+    tft.setTextSize(2);
+    tft.setCursor(0, 0);
+    uint localCounter = 0;  
+    for (int i = 0; i < counter; i++){
+        for (int k = 0; k < 2; k++){
+            tft.print("S");
+            tft.print(localCounter+1);
+            tft.print(" ");
+            tft.print(temperature[localCounter]);
+            tft.print("C");
+            tft.print("     "); 
+            localCounter++; 
+        }
+        tft.println("");
+    }
+    counter = 0;
+}
+*/
+
 
 
 
