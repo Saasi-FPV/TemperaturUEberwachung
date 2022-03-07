@@ -23,8 +23,10 @@
 #define MAXSENSORS 15
 
 
+
 //Globale Variablen
-int numberOfDevices = 0;
+uint numberOfDevices = 0;
+uint messureIntervall = 10;  //Seconds
 
 
 
@@ -54,10 +56,12 @@ void setup() {
 
   delay(1000);
 
-  disp.unPlugsensor();
-  delay(1000);
-  while (!disp.JaNein("Alle Sensoren ausgesteckt?"));
-
+  if (numberOfDevices > 0){
+    disp.unPlugsensor();
+    delay(1000);
+    while (!disp.JaNein("Alle Sensoren ausgesteckt?"));
+    ESP.restart();
+  }
 
   bool flag1 = 1;
   uint count = 0;
@@ -72,7 +76,7 @@ void setup() {
 
     while (flag2){
       ds.selectNext();
-      uint8_t address[8];
+      uint8_t address[8] = {0};
       ds.getAddress(address);
       if (!dsAddress.addressPresent(address)){
         if (!dsAddress.setAddress(count, address)){
@@ -103,7 +107,8 @@ void setup() {
     count++;
   }while(flag1);
 
-  disp.sensorReadinComplete(dsAddress.getNumberOfSensors());
+  numberOfDevices = dsAddress.getNumberOfSensors();
+  disp.sensorReadinComplete(numberOfDevices);
 
 }
 
@@ -115,23 +120,28 @@ char DaTim[] = DATETIMEASSORT; //Date Time sortment
 DateTime now = rtc.now();
 
 
+for (int i = 0; i <= numberOfDevices-1; i++){
+  uint8_t addresslocal[8];
+  dsAddress.getAddress(i, addresslocal);
+  ds.select(addresslocal);
+  float templocal = ds.getTempC();
+  ///////////////////////////////////////////////////////////////
+  Serial.println(i+1);
+  Serial.print("Address:");
+  for (uint8_t i = 0; i < 8; i++) {
+    Serial.print(" ");
+    Serial.print(addresslocal[i]);
+  }
+  Serial.println("");
+  Serial.println(templocal);
+  Serial.println(now.toString(DaTim));
+  ///////////////////////////////////////////////////////////////
+  SDcard.write(i+1, templocal, now.toString(DaTim));
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+delay(messureIntervall * 1000);
 
 
 /*
