@@ -20,7 +20,7 @@ void Display::startScreen(){
     tft.println("Ueberwachung");
     tft.setTextSize(2);
     tft.setCursor(0, 222);
-    tft.println("Jan Jeiziner");
+    tft.println("Jan.J & Leon.V");
     tft.setCursor(270, 222);
     tft.println("2022");
 }
@@ -49,17 +49,6 @@ void Display::plugInSensor(uint sensNr){
     tft.print("Sensor ");
     tft.print(sensNr);
     tft.println(" einstecken.");
-}
-
-void Display::plugedInSensorAddress(uint sensNr, uint8_t Address){
-    tft.fillScreen(ILI9341_BLACK);
-    tft.setTextColor(ILI9341_WHITE);
-    tft.setTextSize(4);
-    tft.setCursor(0, 0);
-    tft.print("Sensor ");
-    tft.println(sensNr);
-    tft.println("Addresse: ");
-    tft.println(Address);
 }
 
 void Display::sensorReadinComplete(uint numberOfSensors){

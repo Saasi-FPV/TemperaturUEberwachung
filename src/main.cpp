@@ -53,7 +53,7 @@ void setup() {
   rtc.begin();
   disp.startScreen();
 
-  delay(1000);
+  delay(3000);
 
   if (!SDcard.begin()){
     disp.sdNotFound();

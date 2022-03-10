@@ -46,7 +46,6 @@ class Display{
         void sdNotFound();
         void unPlugsensor();
         void plugInSensor(uint sensNr);
-        void plugedInSensorAddress(uint sensNr, uint8_t Address);
         bool nextSensor();
         void sensorReadinComplete(uint numberOfSensors);
         bool JaNein(String q);
