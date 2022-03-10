@@ -43,6 +43,7 @@ class Display{
 
         void begin();
         void startScreen();
+        void sdNotFound();
         void unPlugsensor();
         void plugInSensor(uint sensNr);
         void plugedInSensorAddress(uint sensNr, uint8_t Address);
@@ -51,8 +52,6 @@ class Display{
         bool JaNein(String q);
         void showTempPrep(uint sensorNr, float temp);
         void showTemp();
-
-        void touchTest();
     
     
     private:

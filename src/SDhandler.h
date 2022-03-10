@@ -13,7 +13,7 @@ class SDhandler{
         }
 
         
-        void begin();
+        bool begin();
         void write(uint sensNr, float temp, char time[]);
 
 

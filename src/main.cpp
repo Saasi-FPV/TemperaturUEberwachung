@@ -50,15 +50,21 @@ void setup() {
   numberOfDevices = ds.getNumberOfDevices(); Serial.println(ds.getNumberOfDevices());
 
   disp.begin();
-  SDcard.begin();
   rtc.begin();
   disp.startScreen();
 
   delay(1000);
 
+  if (!SDcard.begin()){
+    disp.sdNotFound();
+    delay(2000);
+    while (!disp.JaNein("SD-Karte eingesteckt?"));
+    ESP.restart();
+  }
+
   if (numberOfDevices > 0){
     disp.unPlugsensor();
-    delay(1000);
+    delay(2000);
     while (!disp.JaNein("Alle Sensoren ausgesteckt?"));
     ESP.restart();
   }
@@ -145,28 +151,4 @@ disp.showTemp();
 
 
 delay(messureIntervall * 1000);
-
-
-/*
-Serial.println("Which sensor would you like to read? ");
-
-while (Serial.available() == 0) {
-}
-
-int menuChoice = Serial.parseInt();
-Serial.println(menuChoice);
-
-
-uint8_t address[8];
-dsAddress.getAddress(menuChoice, address);
-
-Serial.print("Address:");
-for (uint8_t i = 0; i < 8; i++) {
-  Serial.print(" ");
-  Serial.print(address[i]);
-}
-Serial.println("");
-delay(500);
-*/
-
 }

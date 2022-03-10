@@ -1,13 +1,15 @@
 #include <SDhandler.h>
 
-void SDhandler::begin(){
+bool SDhandler::begin(){
   Serial.println("SD Begin");
     if (!SD.begin(SD_PIN)) {
     Serial.println("initialization failed!");
+    return 0;
   }
   else{
     Serial.println("initialization Done!");
     myFile = SD.open("/LOG.txt", FILE_WRITE);
+    return 1;
   }
 }
 

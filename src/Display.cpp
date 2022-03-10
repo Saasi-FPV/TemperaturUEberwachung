@@ -25,6 +25,14 @@ void Display::startScreen(){
     tft.println("2022");
 }
 
+void Display::sdNotFound(){
+    tft.fillScreen(ILI9341_BLACK);
+    tft.setTextColor(ILI9341_WHITE);
+    tft.setTextSize(4);
+    tft.setCursor(0, 0);
+    tft.println("SD-Karte nicht gefunden.");
+}
+
 void Display::unPlugsensor(){
     tft.fillScreen(ILI9341_BLACK);
     tft.setTextColor(ILI9341_WHITE);
@@ -171,48 +179,4 @@ void Display::showTemp(){
         }
     }
     counter = 0;
-}
-
-
-
-/*
-void Display::showTemp(){
-    tft.fillScreen(ILI9341_BLACK);
-    tft.setTextColor(ILI9341_WHITE);
-    tft.setTextSize(2);
-    tft.setCursor(0, 0);
-    uint localCounter = 0;  
-    for (int i = 0; i < counter; i++){
-        for (int k = 0; k < 2; k++){
-            tft.print("S");
-            tft.print(localCounter+1);
-            tft.print(" ");
-            tft.print(temperature[localCounter]);
-            tft.print("C");
-            tft.print("     "); 
-            localCounter++; 
-        }
-        tft.println("");
-    }
-    counter = 0;
-}
-*/
-
-
-
-
-
-void Display::touchTest(){
-    
-    if (ts.touched()) {
-    // do something....
-  
-    TS_Point p = ts.getPoint();
-    Serial.print("x = ");
-    Serial.println(p.x);
-    Serial.print(", y = ");
-    Serial.print(p.y);
-    Serial.println("");
-    Serial.println("");
-    }
 }
