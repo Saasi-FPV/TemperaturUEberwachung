@@ -14,7 +14,6 @@ bool SDhandler::begin(){
 }
 
 void SDhandler::write(uint sensNr, float temp, char time[]){
-  if (myFile){
     myFile.print(time);
     myFile.print(" ");
     myFile.print("Sensor Nr: ");
@@ -23,6 +22,4 @@ void SDhandler::write(uint sensNr, float temp, char time[]){
     myFile.println(temp);
 
     myFile.flush();
-  }
-
 }
