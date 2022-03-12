@@ -5,22 +5,17 @@
 #include <Display.h>
 #include <SDhandler.h>
 #include <RTClib.h>
+#include <PinDefinition.h>
 
 
-//Pins
-#define ONEWIREPIN    33    //1Wire BUS
-#define SD_CS          4    //SD CS Pin
-#define TS_CS         25    //TouchScreen CS Pin
-#define TFT_CS         5    //TFT CS Pin
-#define TFT_DC        26    //TFT DC Pin
-#define TFT_RST       27    //TFT RST Pin
+
 
 //Konstanten
-#define BAUDRATE          115200
-#define MAXSENSORS            15
+#define BAUDRATE          115200   //Baud for SerialMonitor
+#define MAXSENSORS            15   //Maximale anzahl an sensoren
 #define DISPLAYROTATION        1   //Display Rotation [0-3]
-#define DATETIMEASSORT "DD.MM.YY-hh:mm:ss"
-#define MAXSENSORS 15
+#define DATETIMEASSORT "DD.MM.YY-hh:mm:ss"  //Darstellung des Zeitformats für LOG File
+
 
 
 
@@ -33,7 +28,7 @@ uint messureIntervall = 10;  //Seconds
 //Objekte erstellen
 DS18B20 ds(ONEWIREPIN);
 AddressList dsAddress(MAXSENSORS);
-Display disp(TFT_CS, TFT_DC, TFT_RST, TS_CS, DISPLAYROTATION);
+Display disp(DISPLAYROTATION);
 SDhandler SDcard(SD_CS);
 RTC_DS3231 rtc;
 
@@ -43,7 +38,7 @@ RTC_DS3231 rtc;
 void setup() {
   Serial.begin(BAUDRATE);
   
-  //To be save that all SPI CS are HIGH else it may get Getoiii...
+  //SPI trouble solver
   pinMode(SD_CS, OUTPUT); pinMode(TS_CS, OUTPUT); pinMode(TFT_CS, OUTPUT);
   digitalWrite(SD_CS, HIGH); digitalWrite(TS_CS, HIGH); digitalWrite(TFT_CS, HIGH);
   
