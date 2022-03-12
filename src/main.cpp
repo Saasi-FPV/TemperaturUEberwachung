@@ -142,7 +142,7 @@ for (int i = 0; i <= numberOfDevices-1; i++){
   Serial.println(templocal);
   Serial.println(now.toString(DaTim));
   ///////////////////////////////////////////////////////////////
-  SDcard.write(i+1, templocal, now.toString(DaTim));
+  SDcard.write(i+1, templocal, now.toString(DaTim));               
   disp.showTempPrep(i, templocal);
 }
 
