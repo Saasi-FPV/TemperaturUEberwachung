@@ -145,5 +145,5 @@ disp.showTemp();
 
 
 
-delay(messureIntervall * 1000);
+delay(MESSURINTERFALL * 1000);
 }
