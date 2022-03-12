@@ -13,6 +13,7 @@
 //Konstanten
 #define BAUDRATE          115200   //Baud for SerialMonitor
 #define MAXSENSORS            15   //Maximale anzahl an sensoren
+#define MESSURINTERFALL       10   //Mess Intervall in Sekunden
 #define DISPLAYROTATION        1   //Display Rotation [0-3]
 #define DATETIMEASSORT "DD.MM.YY-hh:mm:ss"  //Darstellung des Zeitformats für LOG File
 
@@ -21,7 +22,6 @@
 
 //Globale Variablen
 uint numberOfDevices = 0;
-uint messureIntervall = 10;  //Seconds
 
 
 
